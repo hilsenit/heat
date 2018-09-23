@@ -6,14 +6,14 @@ import { HeatItem } from './heat';
   selector: 'heat',
   template: `
     <button (click)="createAreas()">Start</button>
-    <div id="heatWrapper" *ngFor="let h_item of heat_items">
-      <heat_templ [warmth]="h_item?.warmth"></heat_templ>
+    <div id="heatWrapper">
+      <heat_templ *ngFor="let h_item of heat_items" [warmth]="h_item?.warmth" [id]="h_item?.id"></heat_templ>
     </div>
   `
 })
 
 export class AppComponent implements OnInit {
-  heat_items: HeatItem[] = [{id: 100, warmth: 100}];;
+  heat_items: any = [{}] ;
   innerWidth: any;
   innerHeight: any;
 
