@@ -5,25 +5,26 @@ import { HeatItem } from './heat';
 @Component({
   selector: 'heat',
   template: `
-  <div id="heatWrapper" *ngFor="let h_item of heat_items">
-    <heat_templ [warmth]="h_item?.warmth"></heat_templ>
-  </div>
+    <button (click)="createAreas()">Start</button>
+    <div id="heatWrapper" *ngFor="let h_item of heat_items">
+      <heat_templ [warmth]="h_item?.warmth"></heat_templ>
+    </div>
   `
 })
 
 export class AppComponent implements OnInit {
-  heat_items: HeatItem[];
+  heat_items: HeatItem[] = [{id: 100, warmth: 100}];;
   innerWidth: any;
   innerHeight: any;
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
-    this.createAreas(this.innerWidth, this.innerHeight);
-    console.log(this.heat_items);
   }
 
-  createAreas(width: number, height: number) {
+  createAreas() {
+    let width = this.innerWidth;
+    let height = this.innerHeight;
     let box_w_a_h = 100;
     let number_of_box_width = width / box_w_a_h;
     let number_of_box_height = height / box_w_a_h;
@@ -31,7 +32,9 @@ export class AppComponent implements OnInit {
     for(var bi=0; bi < total_number_of_boxes; bi++){
       let box = new HeatItem
       box = {id: bi, warmth: bi};
+      this.heat_items.push(box);
     }
+    console.log(this.heat_items);
   }
 
 }
